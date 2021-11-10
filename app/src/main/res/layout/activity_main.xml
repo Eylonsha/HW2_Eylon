@@ -265,6 +265,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:tag="0"
+            android:layout_margin="6dp"
             app:srcCompat="@drawable/heart" />
 
         <ImageView
@@ -273,6 +274,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:tag="1"
+            android:layout_margin="6dp"
             app:srcCompat="@drawable/heart" />
 
         <ImageView
@@ -281,6 +283,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:tag="2"
+            android:layout_margin="6dp"
             app:srcCompat="@drawable/heart" />
 
     </LinearLayout>

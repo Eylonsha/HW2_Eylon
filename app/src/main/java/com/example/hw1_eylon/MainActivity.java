@@ -17,7 +17,7 @@ import java.util.Random;
 
 
 public class MainActivity extends AppCompatActivity {
-    private final int numOfRows =(6); //1=cars
+    private final int numOfRows =(5+1); //1=cars
     private final int numOfCols =3;
     private final int numOfHearts = 3;
     private final int numOfRocks = (numOfRows - 1) * numOfCols;
@@ -155,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
                 rightClick();
             }
         });
-
 
 
     }
