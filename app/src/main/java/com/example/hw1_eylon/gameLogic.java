@@ -13,7 +13,7 @@ public class gameLogic {
     private ArrayList<ImageView> rocks;
     private ArrayList<ImageView> cars;
     private ArrayList<ImageView> hearts;
-
+    private ArrayList<ImageView> coins;
    // private int heartCount;
 
     public gameLogic() {
@@ -41,7 +41,17 @@ public class gameLogic {
         return this;
     }
 
+    //####################################################################
+    //Get & Set coins
+    public ArrayList<ImageView> getCoins(){
 
+        return coins;
+    }
+    public gameLogic setCoins(ArrayList<ImageView> coins) {
+        this.coins = coins;
+        return this;
+    }
+    //####################################################################
     //####################################################################
     //Get & Set Rocks
         public ArrayList<ImageView> getRocks(){
@@ -55,6 +65,7 @@ public class gameLogic {
     //####################################################################
     //Get & Set BTNs
     public ImageButton getPanel_BTN_Left() {
+
         return panel_BTN_Left;
     }
 
@@ -64,6 +75,7 @@ public class gameLogic {
     }
 
     public ImageButton getPanel_BTN_Right() {
+
         return panel_BTN_Right;
     }
 

@@ -3,6 +3,8 @@ package com.example.hw1_eylon;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,29 +14,55 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.material.textview.MaterialTextView;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 
 public class MainActivity extends AppCompatActivity {
-    private final int numOfRows =(5+1); //1=cars
-    private final int numOfCols =3;
+
+    private Bundle bundle;
+    public final static String CONTROL_KEY = "CONTROL_KEY";
+    public final static String CONTROL_VALUE_BUTTONS = "CONTROL_VALUE_BUTTONS";
+    public final static String CONTROL_VALUE_ACC = "CONTROL_VALUE_ACC";
+    public final static String SPEED_KEY = "SPEED_KEY";
+    public final static String SPEED_VALUE_SLOW = "SPEED_VALUE_SLOW";
+    public final static String SPEED_VALUE_FAST = "SPEED_VALUE_FAST";
+
+
+
+    public final static String COIN_STRING = "COIN_STRING";
+    public final static String ROCK_STRING = "ROCK_STRING";
+    private final Random rand = new Random();
+    public final static int StoneRotation = 5;
+    public final static int STONE_WEIGHT = 5;
+    public final static int COIN_WEIGHT = 2;
+    private final int numOfRows = (5 + 1); //1=cars
+    private final int numOfCols = 5;
     private final int numOfHearts = 3;
     private final int numOfRocks = (numOfRows - 1) * numOfCols;
     private int carPostion = numOfCols / 2;
-    private final int DELAY = 1000;
+    private int DELAY = 1000;
     private final Handler handler = new Handler();
     private Runnable timerRunnable;
-    private ImageButton panel_BTN_Left;
-    private ImageButton panel_BTN_Right;
+    private MaterialTextView Game_distance;
+    private MaterialTextView Game_score;
     private ArrayList<ImageView> rocks;
     private ArrayList<ImageView> cars;
     private ArrayList<ImageView> hearts;
-    private int maxHearts=3;
-    private int heartCount=maxHearts;
-    private int random;
+    private ArrayList<ImageView> coins;
+    private MediaPlayer[] coinSounds;
+    private MediaPlayer crushSound;
+    private MediaPlayer coinSound;
+    private MediaPlayer coin2Sound;
+    private int maxHearts = 3;
+    private int heartCount = maxHearts;
+//    private int random;
     private boolean rowWithRock = true;
-
+    private int score = 0;
+    private int distance=0;
 
 
     @Override
@@ -50,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startTicker() {
-        handler.postDelayed(timerRunnable,DELAY);
+        handler.postDelayed(timerRunnable, DELAY);
     }
 
     private void stopTicker() {
@@ -58,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateClockView() {
+        distance+=10;
+        Game_distance.setText("Distance: " + distance + "M");
         updateView();
         rollingStones();
         checkCrash();
@@ -65,15 +95,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkCrash() {
-        if(rocks.get(getIndex(numOfRows-1,carPostion)).getVisibility()==View.VISIBLE){
-            crushByRock();
-    vibrate();
+        ImageView obj = rocks.get(getIndex(numOfRows - 1, carPostion));
+        if (obj.getVisibility() == View.VISIBLE) {
+            if (obj.getTag().equals(ROCK_STRING)) {
 
+                crushByRock();
+
+            } else {
+                updateScore();
+
+                coinSounds[rand.nextInt(coinSounds.length)].start();
+            }
+            vibrate();
+        }else
+        fixCarView();
 
         }
+
+
+
+    private void raiseScore() {
+        score+=100;
     }
 
     private void crushByRock() {
+        crushSound.start();
         heartCount--;
         removeHeart();
         checkHearts();
@@ -95,11 +141,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void gameOver() {
-        heartCount=maxHearts;
-        for (int i = 0; i < maxHearts; i++) {
-            hearts.get(i).setVisibility(View.VISIBLE);
-
-        }
+        Intent intent = new Intent(this, record_Activity.class);
+        bundle.putInt(record_Activity.PLAYER_SCORE_KEY,score);
+        intent.putExtra(activity_Menu.BUNDLE_KEY, bundle);
+        startActivity(intent);
+        finish();
     }
 
     private void fixCarView() {
@@ -113,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
             for (int j = 0; j <numOfCols ; j++) {
                 rocks.get(getIndex(i, j)).setVisibility(rocks.get(getIndex(i - 1, j)).getVisibility());
                 rocks.get(getIndex(i, j)).setImageDrawable(rocks.get(getIndex(i - 1, j)).getDrawable());
+                rocks.get(getIndex(i, j)).setRotation(rocks.get(getIndex(i - 1, j)).getRotation());
+                rocks.get(getIndex(i, j)).setTag(rocks.get(getIndex(i - 1, j)).getTag());
             }
         }
 
@@ -127,51 +175,119 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.bundle = getIntent().getBundleExtra(activity_Menu.BUNDLE_KEY);
+
         vibrate();
-        findViews();
         gameLogic gl = new gameLogic();
-        gl.setPanel_BTN_Left(panel_BTN_Left).setPanel_BTN_Right(panel_BTN_Right).setRocks(rocks).setHearts(hearts).setCars(cars);
+        Game_score=findViewById(R.id.Game_score);
+        crushSound = MediaPlayer.create(MainActivity.this, R.raw.crash);
+        coinSound = MediaPlayer.create(MainActivity.this, R.raw.coin);
+        coin2Sound = MediaPlayer.create(MainActivity.this, R.raw.coin2);
+        coinSounds = new MediaPlayer[]{coinSound,coin2Sound};
+
+        Game_distance=findViewById(R.id.Game_distance);
+
+        score=0;
+        distance=0;
+        cars = createCars();
+        rocks = createRocks();
+        hearts =createHearts();
+        coins = createCoins();
+
+        initSettings();
+
         timerRunnable = () -> {
             updateClockView();
             handler.postDelayed(timerRunnable, DELAY);
         };
-        cars = createCars();
-        rocks = createRocks();
-        hearts =createHearts();
-
-        //Left Bottom
-        gl.getPanel_BTN_Left().setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-            vibrate();
-                leftClick();
-            }
-        });
-        //Right Bottom
-        gl.getPanel_BTN_Right().setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                vibrate();
-                rightClick();
-            }
-        });
 
 
     }
 
+    private void moveCar(String direction){
+        vibrate();
+        if(direction.equalsIgnoreCase("Left")){
+            leftClick();
+        }else{
+            rightClick();
+        }
+    }
+
+    private void initSettings() {
+        if (bundle.getString(CONTROL_KEY,CONTROL_VALUE_BUTTONS).equals(CONTROL_VALUE_BUTTONS)){
+            displayButtons();
+        }else {
+            displayAcc();
+        }
+        if (bundle.getString(SPEED_KEY,SPEED_VALUE_SLOW).equals(SPEED_VALUE_FAST)){
+            DELAY/=2;
+        }
+
+    }
+
+    private void displayButtons() {
+        Fragment_Buttons fragmentButtons = new Fragment_Buttons();
+        fragmentButtons.setCallBack_control(direction -> moveCar(direction));
+        getSupportFragmentManager().beginTransaction().add(R.id.ArrowsLayout, fragmentButtons).commit();
+
+    }
+
+    private void displayAcc() {
+        Fragment_ACC fragmentACC = new Fragment_ACC();
+        fragmentACC.setCallBack_control(direction -> moveCar(direction));
+        fragmentACC.setActivity(this);
+        getSupportFragmentManager().beginTransaction().add(R.id.ArrowsLayout, fragmentACC).commit();
+    }
+
+
+    private ArrayList<ImageView> createCoins() {
+
+            coins = new ArrayList<ImageView>();
+            for (int i = 0; i < numOfRocks; i++) {
+                coins.add(findViewById(getResources().getIdentifier("linearLayoutCoin" + i, "id", getPackageName())));
+            }
+        for (int i = 0; i < numOfCols; i++) {
+            coins.add(findViewById(getResources().getIdentifier("car" + i, "id", getPackageName())));
+        }
+            return coins;
+        }
+
+
     private void rollingStones() {
         clearFirstRow();
         if(rowWithRock){
-            random= new Random().nextInt(numOfCols);
-            rocks.get(random).setVisibility(View.VISIBLE);
+//            random= new Random().nextInt(numOfCols);
+////            rocks.get(random).setVisibility(View.VISIBLE);
+////            coins.get(random).setVisibility(View.VISIBLE);
+            randomFirstRow();
         }
         rowWithRock = !rowWithRock;
 
     }
 
+    private void randomFirstRow() {
+        int col = rand.nextInt(numOfCols);
+        int obj = rand.nextInt(STONE_WEIGHT + COIN_WEIGHT);
+
+        if (obj < STONE_WEIGHT) {
+            rocks.get(getIndex(0, col)).setImageResource(R.drawable.rock);
+            //rocks.get(getIndex(0, col)).setRotation(StoneRotation);
+            //rocks.get(getIndex(0, col)).setImageDrawable(rocks.get(getIndex(0, col)).getDrawable());
+            rocks.get(getIndex(0, col)).setTag(ROCK_STRING);
+        }else{
+            rocks.get(getIndex(0, col)).setImageResource(R.drawable.coin);
+           // rocks.get(getIndex(0, col)).setRotation(0);
+            rocks.get(getIndex(0, col)).setTag(COIN_STRING);
+
+        }
+        rocks.get(getIndex(0, col)).setVisibility(View.VISIBLE);
+    }
+
     private void clearFirstRow() {
         for (int i = 0; i <numOfCols ; i++) {
             rocks.get(i).setVisibility(View.INVISIBLE);
+            coins.get(i).setVisibility(View.INVISIBLE);
         }
     }
 
@@ -232,13 +348,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void findViews() {
-            panel_BTN_Left = findViewById(R.id.panel_BTN_Left);
-            panel_BTN_Right = findViewById(R.id.panel_BTN_Right);
 
-        }
+    private void updateScore() {
+        score += 10;
+        //coinSound.start();
 
-
+        Game_score.setText("Coins" + ": " + score + "$");
+    }
     }
 
 

@@ -7,37 +7,66 @@
     android:background="@drawable/road"
     tools:context=".MainActivity">
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/Game_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="16dp"
+        android:text="Distance : 0M"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/Game_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="SCORE : 0"
+        android:textColor="@color/design_default_color_background"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/ArrowsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
+    </FrameLayout>
 
-        <ImageButton
-            android:id="@+id/panel_BTN_Left"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/left" />
+<!--    <LinearLayout-->
+<!--        android:id="@+id/ArrowsLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent">-->
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/panel_BTN_Left"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginStart="12dp"-->
+<!--            android:layout_marginBottom="12dp"-->
+<!--            android:background="@drawable/left" />-->
 
-        <ImageButton
-            android:id="@+id/panel_BTN_Right"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/right"
-            tools:layout_marginStart="260dp" />
-    </LinearLayout>
+<!--        <Space-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/panel_BTN_Right"-->
+<!--            android:layout_width="60dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:background="@drawable/right"-->
+<!--            tools:layout_marginStart="260dp" />-->
+<!--    </LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/Vertical_Rocks"
@@ -77,15 +106,6 @@
                 android:visibility="invisible"
                 app:srcCompat="@drawable/rock" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LinearLayout_Rocks_1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
             <ImageView
                 android:id="@+id/imageView_Rock_3"
                 android:layout_width="0dp"
@@ -100,8 +120,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/rock"
-                tools:visibility="visible" />
+                app:srcCompat="@drawable/rock" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout_Rocks_1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView_Rock_5"
@@ -111,22 +139,14 @@
                 android:visibility="invisible"
                 app:srcCompat="@drawable/rock" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LinearLayout_Rocks_2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
             <ImageView
                 android:id="@+id/imageView_Rock_6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/rock" />
+                app:srcCompat="@drawable/rock"
+                tools:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/imageView_Rock_7"
@@ -144,15 +164,6 @@
                 android:visibility="invisible"
                 app:srcCompat="@drawable/rock" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LinearLayout_Rocks_3"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
             <ImageView
                 android:id="@+id/imageView_Rock_9"
                 android:layout_width="0dp"
@@ -160,6 +171,15 @@
                 android:layout_weight="1"
                 android:visibility="invisible"
                 app:srcCompat="@drawable/rock" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout_Rocks_2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView_Rock_10"
@@ -176,15 +196,6 @@
                 android:layout_weight="1"
                 android:visibility="invisible"
                 app:srcCompat="@drawable/rock" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/LinearLayout_Rocks_4"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView_Rock_12"
@@ -213,6 +224,104 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayout_Rocks_3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView_Rock_15"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+            <ImageView
+                android:id="@+id/imageView_Rock_16"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+            <ImageView
+                android:id="@+id/imageView_Rock_17"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+            <ImageView
+                android:id="@+id/imageView_Rock_18"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+            <ImageView
+                android:id="@+id/imageView_Rock_19"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout_Rocks_4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView_Rock_20"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+            <ImageView
+                android:id="@+id/imageView_Rock_21"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+            <ImageView
+                android:id="@+id/imageView_Rock_22"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+            <ImageView
+                android:id="@+id/imageView_Rock_23"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+            <ImageView
+                android:id="@+id/imageView_Rock_24"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/CarLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -232,12 +341,28 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:visibility="visible"
+                android:visibility="invisible"
 
                 app:srcCompat="@drawable/car" />
 
             <ImageView
                 android:id="@+id/car2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="visible"
+                app:srcCompat="@drawable/car" />
+
+            <ImageView
+                android:id="@+id/car3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/car" />
+
+            <ImageView
+                android:id="@+id/car4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -254,8 +379,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -263,30 +388,336 @@
             android:id="@+id/imageViewHeart0"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_margin="6dp"
             android:layout_weight="1"
             android:tag="0"
-            android:layout_margin="6dp"
             app:srcCompat="@drawable/heart" />
 
         <ImageView
             android:id="@+id/imageViewHeart1"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_margin="6dp"
             android:layout_weight="1"
             android:tag="1"
-            android:layout_margin="6dp"
             app:srcCompat="@drawable/heart" />
 
         <ImageView
             android:id="@+id/imageViewHeart2"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_margin="6dp"
             android:layout_weight="1"
             android:tag="2"
-            android:layout_margin="6dp"
             app:srcCompat="@drawable/heart" />
 
     </LinearLayout>
 
 
+    //#######################COINS######################
+
+    <LinearLayout
+        android:id="@+id/Vertical_Coins"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ArrowsLayout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/LinearLayout_Coins_0"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout_Coins_1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin"
+                tools:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin9"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout_Coins_2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin10"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin11"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin12"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin13"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin14"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout_Coins_3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin15"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin16"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin17"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin18"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin19"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/coin" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout_Coins_4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin20"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin21"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin22"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin23"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+            <ImageView
+                android:id="@+id/linearLayoutCoin24"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/rock" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/CarLayout_Coins"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/car5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/car" />
+
+            <ImageView
+                android:id="@+id/car6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+
+                app:srcCompat="@drawable/car" />
+
+            <ImageView
+                android:id="@+id/car7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/car" />
+
+            <ImageView
+                android:id="@+id/car8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/car" />
+
+            <ImageView
+                android:id="@+id/car9"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/car" />
+
+        </LinearLayout>
+    </LinearLayout>
+    //#######################COINS######################
 </RelativeLayout>
